@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Play, Video, ArrowRight, Zap, RefreshCw, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 export default function CoursesPage() {
   const supabase = createClient();
@@ -108,9 +109,20 @@ export default function CoursesPage() {
                            <span className="text-[10px] uppercase font-black tracking-widest text-[#8a8591] mb-1">Enrollment Fee</span>
                            <span className="text-2xl font-black text-white">₹{course.price}</span>
                         </div>
-                        <Link href={course.payment_link || "#"} target={course.payment_link ? "_blank" : "_self"} className="h-12 px-6 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-[#8b7ff0] hover:text-white transition-colors">
+                        <button 
+                          onClick={() => {
+                            if (course.payment_link && course.payment_link !== "#") {
+                              window.open(course.payment_link, "_blank");
+                            } else {
+                              toast.info("Enquiry Initiated", {
+                                description: "The enrollment link for this masterclass is being finalized. We've notified our team to contact you with the registration details.",
+                              });
+                            }
+                          }}
+                          className="h-12 px-6 rounded-full bg-white text-black font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-[#8b7ff0] hover:text-white transition-colors"
+                        >
                            Enroll <ArrowRight size={14} />
-                        </Link>
+                        </button>
                      </div>
                    </div>
                  </div>

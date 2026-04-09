@@ -23,11 +23,19 @@ import { motion } from "framer-motion";
 // ─── DATA DELEGATES ───────────────────────────────────────────────────────────
 const CORE_SERVICES = [
   {
+    icon: "🏠", label: "Home Therapy",
+    desc: "Personalized neuro-affirming therapy (Special Ed, ABA, Speech) delivered in the comfort and safety of your own home.",
+    tags: ["At-Home", "Personalized", "Daily Reports"],
+    color: "from-[#1d9e7520] to-transparent", accent: "#1d9e75", border: "#1d9e7530",
+    href: "/programs/homecare",
+    stat: "1,200+ families supported in Bangalore",
+  },
+  {
     icon: "🎓", label: "Shadow Teachers",
     desc: "Classroom support specialists who work alongside your child in mainstream schools, facilitating learning without singling them out.",
     tags: ["In-School", "Daily support", "IEP aligned"],
     color: "from-[#97C45920] to-transparent", accent: "#97C459", border: "#97C45930",
-    href: "/specialists?category=Special+Education&type=shadow-teacher",
+    href: "/programs/shadow-teaching",
     stat: "60+ shadow teachers across Bangalore & Delhi",
   },
   {
@@ -35,24 +43,16 @@ const CORE_SERVICES = [
     desc: "Licensed child psychologists and therapists helping with anxiety, school transitions, emotional regulation, trauma, and family dynamics.",
     tags: ["ADHD", "Anxiety", "Behavioural", "Family therapy"],
     color: "from-[#F0997B20] to-transparent", accent: "#F0997B", border: "#F0997B30",
-    href: "/specialists?category=Child+Counselling",
+    href: "/programs/counselling",
     stat: "57+ counsellors · Available online & in-person",
   },
   {
-    icon: "🏫", label: "School Inclusion",
-    desc: "Specialists who work directly with schools to advocate for neurodiverse children — IEP planning, teacher training, and accommodation design.",
-    tags: ["IEP", "School advocacy", "Teacher training"],
+    icon: "🏫", label: "Special Education",
+    desc: "Identifying specific learning needs through clinical diagnosis and creating actionable, personalized learning strategies for the classroom.",
+    tags: ["IEP", "Academic Support", "Diagnostics"],
     color: "from-[#5DCAA520] to-transparent", accent: "#5DCAA5", border: "#5DCAA530",
-    href: "/specialists?category=School+Inclusion",
-    stat: "20+ schools supported",
-  },
-  {
-    icon: "👨‍👩‍👧", label: "Parent Training",
-    desc: "Workshops and coaching for parents to understand their child's diagnosis, build strategies at home, and reduce caregiver burnout.",
-    tags: ["1:1 coaching", "Group workshops", "Online"],
-    color: "from-[#8b7ff020] to-transparent", accent: "#8b7ff0", border: "#8b7ff030",
-    href: "/specialists?category=Parenting",
-    stat: "1,000+ parents trained",
+    href: "/programs/special-education",
+    stat: "500+ outcome-based IEPs created",
   },
 ];
 
@@ -262,7 +262,7 @@ export default function ProgramsPage() {
                       {svc.stat}
                     </div>
                     <Link href={svc.href} className="flex items-center gap-4 text-xs font-black uppercase tracking-widest text-[#8b7ff0] group-hover:text-white transition-all">
-                      Find Experts <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
+                      View Program <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                     </Link>
                   </div>
                 </div>
@@ -314,9 +314,9 @@ export default function ProgramsPage() {
                   <p className="text-sm text-[#8a8591] mb-8 leading-relaxed font-medium">
                     {course.desc}
                   </p>
-                  <button className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[#8b7ff0] hover:bg-[#8b7ff0] hover:text-white transition-all active:scale-95">
+                  <Link href="/courses" className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[#8b7ff0] hover:bg-[#8b7ff0] hover:text-white transition-all active:scale-95">
                     <BookOpen className="w-4 h-4" /> Enroll Now
-                  </button>
+                  </Link>
                 </div>
               ))}
             </div>

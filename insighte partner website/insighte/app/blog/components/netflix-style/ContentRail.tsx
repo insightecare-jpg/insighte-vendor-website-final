@@ -59,7 +59,7 @@ export function ContentRail({ title, subtitle, posts, accentColor = "#D3C4B5" }:
             >
               <Link href={`/blog/${post.slug}`} className="block group/card relative aspect-video rounded-[32px] overflow-hidden border border-white/5 bg-[#191a2d]">
                 <img 
-                  src={post.cover_image_url || "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2940&auto=format&fit=crop"} 
+                  src={post.cover_image_url && post.cover_image_url.startsWith('http') ? post.cover_image_url : "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2940&auto=format&fit=crop"} 
                   className="w-full h-full object-cover transition-all duration-700 grayscale-[40%] group-hover/card:grayscale-0 group-hover/card:scale-110 opacity-60 group-hover/card:opacity-100"
                   alt={post.title_en}
                 />
