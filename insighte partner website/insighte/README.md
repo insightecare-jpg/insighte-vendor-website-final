@@ -16,10 +16,16 @@ Premium, neuro-inclusive care marketplace for families. Built with the **Antigra
 - **RBAC**: Role-based access control for Parents, Providers, and Admins.
 - **Mobile First**: Minimum 44px touch targets; safe-area handling.
 
-## Deployment
-1. Update `.env.local` with your Supabase and Razorpay credentials.
-2. Run `npm run dev` to start the interface.
-3. Deploy to Vercel with the environment variables.
+## Repository
+- **URL**: [insighte-vendor-website-final](https://github.com/insightecare-jpg/insighte-vendor-website-final)
+
+## Setup
+1. **Environment Variables**: Use the `.env.local` file. The following keys are required:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `DATABASE_URL`
+2. **Installation**: `npm install`
+3. **Development**: `npm run dev`
 
 ---
 "Connection Before Correction" — Insighte DNA.
