@@ -53,14 +53,14 @@ export function ProviderCard({ provider, className, priority = false }: Provider
         className
       )}
     >
-      {/* ── IMAGE SECTION (40%) ── */}
-      <div className="relative h-[200px] w-full overflow-hidden">
+      {/* ── IMAGE SECTION (Taller portrait) ── */}
+      <div className="relative h-[320px] w-full overflow-hidden">
         <Image
           src={provider.avatar_url || "/images/experts/special_educator.png"}
           alt={provider.name}
           fill
           priority={priority}
-          className="object-cover object-top transition-transform duration-[1.5s] group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-[1.5s] group-hover:scale-110"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = "/images/experts/special_educator.png";
@@ -119,17 +119,15 @@ export function ProviderCard({ provider, className, priority = false }: Provider
 
       {/* ── HIGH DENSITY FOOTER (40%) ── */}
       <div className="mt-auto px-7 pb-7 pt-4 bg-gradient-to-t from-white/[0.02] to-transparent">
-        {/* Expertise Grid */}
-        <div className="grid grid-cols-1 gap-2.5 mb-5">
+        {/* Expertise Row (Compact - One Line) */}
+        <div className="flex flex-wrap gap-2 mb-5">
           {expertise.map((tag) => (
             <div 
               key={tag} 
-              className="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white/[0.03] border border-white/[0.06] group-hover:bg-white/[0.05] group-hover:border-[#8b7ff030] transition-all duration-300"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/[0.06] group-hover:bg-[#8b7ff010] group-hover:border-[#8b7ff040] transition-all duration-300"
             >
-              <div className="w-6 h-6 rounded-lg bg-[#8b7ff010] flex items-center justify-center border border-[#8b7ff020]">
-                <Sparkles className="w-3 h-3 text-[#8b7ff0]" aria-hidden="true" />
-              </div>
-              <span className="text-[11px] font-bold text-[#e8e2d8] tracking-tight">{tag}</span>
+              <Sparkles className="w-2.5 h-2.5 text-[#8b7ff0]" aria-hidden="true" />
+              <span className="text-[10px] font-bold text-[#e8e2d8] tracking-tight">{tag}</span>
             </div>
           ))}
         </div>

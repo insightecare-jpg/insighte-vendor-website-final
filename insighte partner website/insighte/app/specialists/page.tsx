@@ -603,7 +603,7 @@ function SpecialistsContent() {
                     <p style={{ fontSize: 13, color: "#8a8591", marginBottom: 4 }}>Not sure who to choose?</p>
                     <p style={{ fontSize: 12, color: "#5a5466" }}>Answer 3 questions and we'll match you with the right specialist.</p>
                   </div>
-                  <Link href="/book" style={{
+                  <Link href="/triage" style={{
                     display: "inline-flex", alignItems: "center", gap: 6,
                     padding: "10px 22px", borderRadius: 100, fontSize: 13, fontWeight: 700,
                     background: "rgba(239,159,39,0.1)", border: "0.5px solid rgba(239,159,39,0.3)",

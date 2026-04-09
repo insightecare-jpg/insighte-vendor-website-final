@@ -194,7 +194,7 @@ export default function ProgramsPage() {
             <Link href="/specialists" className="px-8 py-4 rounded-2xl bg-white text-[#0d0f1a] font-black uppercase text-xs tracking-widest hover:bg-[#8b7ff0] hover:text-white transition-all shadow-2xl active:scale-95">
               Browse Specialists
             </Link>
-            <Link href="/book" className="px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase text-xs tracking-widest hover:bg-white/10 transition-all active:scale-95">
+            <Link href="/triage" className="px-8 py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase text-xs tracking-widest hover:bg-white/10 transition-all active:scale-95">
               Get Guided Discovery
             </Link>
           </motion.div>
@@ -382,7 +382,7 @@ export default function ProgramsPage() {
               triage will map a precision pathway through specialists and programs.
             </p>
             <Link 
-              href="/book" 
+              href="/triage" 
               className="inline-flex items-center gap-4 px-12 py-5 rounded-2xl bg-[#5DCAA5] text-[#0d0f1a] font-black uppercase text-xs tracking-[0.2em] hover:bg-white transition-all shadow-2xl shadow-[#5DCAA520] active:scale-95"
             >
               Start Guided Discovery <ArrowRight className="w-5 h-5" />

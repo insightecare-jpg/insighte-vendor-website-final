@@ -188,15 +188,18 @@ export function TopExperts({ zone }: TopExpertsProps) {
         </div>
       )}
 
-      {/* Adding negative margins to allow edge-to-edge scrolling on smaller screens */}
-      <div className="relative -mx-6 px-6">
+      {/* ── EXPERTS LIST (Vertical on Mobile, Horizontal Scroll on Desktop) ── */}
+      <div className="relative -mx-6 px-6 lg:mx-0 lg:px-0">
         <div 
           ref={cardsRef} 
-          className="flex overflow-x-auto gap-6 pb-12 pt-4 snap-x snap-mandatory custom-scrollbar"
+          className="flex flex-col md:flex-row md:overflow-x-auto gap-8 md:gap-6 pb-12 pt-10 md:snap-x md:snap-mandatory custom-scrollbar"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {filteredExperts.map((expert) => (
-            <div key={expert.id} className="snap-start flex-none w-[85vw] sm:w-[320px] md:w-[360px] lg:w-[380px]">
+            <div 
+              key={expert.id} 
+              className="md:snap-start flex-none w-full md:w-[360px] lg:w-[380px] mb-4 md:mb-0"
+            >
               <ProviderCard 
                 provider={expert as any} 
                 className="h-full w-full"
@@ -205,7 +208,7 @@ export function TopExperts({ zone }: TopExpertsProps) {
           ))}
         </div>
         
-        {/* Optional fading edges for desktop */}
+        {/* Optional fading edges for desktop scroll */}
         <div className="hidden lg:block absolute top-0 left-0 bottom-12 w-6 bg-gradient-to-r from-[#111224] to-transparent pointer-events-none z-10" />
         <div className="hidden lg:block absolute top-0 right-0 bottom-12 w-12 bg-gradient-to-l from-[#111224] to-transparent pointer-events-none z-10" />
       </div>

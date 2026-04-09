@@ -150,7 +150,7 @@ export default function InsighteHome() {
                 background: "#e8e2d8", color: "#0d0f1a", borderRadius: 100,
                 padding: "12px 28px", fontSize: 13, fontWeight: 600, textDecoration: "none",
               }}>Get matched with the right expert →</Link>
-              <Link href="/book" className="focus-visible:ring-2 focus-visible:ring-[#8b7ff0] focus-visible:outline-none" style={{
+              <Link href="/triage" className="focus-visible:ring-2 focus-visible:ring-[#8b7ff0] focus-visible:outline-none" style={{
                 display: "inline-flex", alignItems: "center", gap: 8,
                 background: "transparent", color: "#8b7ff0",
                 border: "0.5px solid rgba(139,127,240,0.3)", borderRadius: 100,
