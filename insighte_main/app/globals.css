@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAFAF9;
+  --foreground: #1C1917;
+  --color-primary: #1F2937;
+  --shadow-float: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    @apply antialiased subpixel-antialiased;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-lg;
+  }
+  
+  .glass-dark {
+    @apply bg-black/70 backdrop-blur-xl border border-white/10 shadow-float;
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-float active:scale-[0.98];
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(0.5deg); }
+}

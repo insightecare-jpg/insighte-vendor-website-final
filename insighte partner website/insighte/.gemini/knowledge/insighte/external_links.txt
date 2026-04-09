@@ -1,0 +1,2 @@
+Supabase URL: https://riukjenrqfdsbvsessmk.supabase.co
+GitHub Repo: https://github.com/spot-dev-insighte/insighte-partner-one

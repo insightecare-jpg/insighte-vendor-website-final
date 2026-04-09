@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Journey | Weightless Minds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline overrides for specific page needs if any, mainly ensuring full height centering */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-container">
+        <!-- Reusing the floating elements from index.html for consistency -->
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+
+    <main class="glass-card journey-card">
+        <header class="journey-header">
+            <a href="index.html" class="back-link">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back
+            </a>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            <div class="logo-small">WM</div>
+        </header>
+
+        <div id="wizard-content" class="wizard-content">
+            <!-- Steps will be injected here by JS -->
+        </div>
+
+        <footer class="journey-footer">
+            <button id="prevBtn" class="btn-secondary hidden">Previous</button>
+            <button id="nextBtn" class="btn-primary" disabled>Next</button>
+        </footer>
+    </main>
+
+    <script src="journey.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Next.js
+.next/
+out/
+build/
+
+# Misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+next-env.d.ts
+
+# Local env files
+.env*.local
+
+# Vercel
+.vercel
+
+# Sub-projects
+insighte-session-logger-/node_modules
+insighte_main/node_modules
+insighte partner website/insighte/node_modules
+insighte partner website/insighte/.next
+insighte partner website/insighte-app/node_modules
