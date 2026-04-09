@@ -110,7 +110,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0A0B1A] text-[#e1e0fa] font-sans selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-[#0A0B1A] text-[#e1e0fa] font-sans selection:bg-[#8b7ff0] selection:text-white">
       <Navbar />
 
       <main>
@@ -125,7 +125,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
 
         <div className="max-w-7xl mx-auto px-6 relative -mt-32 z-20 space-y-32 pb-60">
           {/* SEARCH & FILTER OVERLAY */}
-          <div className="flex flex-col gap-10 p-10 bg-[#16172B]/60 backdrop-blur-[80px] rounded-[64px] border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,0.5)] relative overflow-hidden group/filter">
+          <div className="flex flex-col gap-10 p-12 bg-[#16172B]/40 backdrop-blur-[120px] rounded-[64px] border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] relative overflow-hidden group/filter">
              {/* Playful background blobs for header */}
              <div className="absolute top-0 right-0 w-64 h-64 bg-[#4FD1C5]/5 blur-[80px] -mr-20 -mt-20 group-hover/filter:bg-[#4FD1C5]/10 transition-all duration-1000" />
              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FF6B6B]/5 blur-[80px] -ml-20 -mb-20 group-hover/filter:bg-[#FF6B6B]/10 transition-all duration-1000" />
@@ -138,7 +138,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Explore the Wisdom Library..." 
-                    className="w-full h-full bg-white/5 rounded-full pl-22 pr-8 text-sm font-black uppercase tracking-widest border border-white/5 outline-none focus:ring-8 focus:ring-white/5 transition-all placeholder:text-zinc-600"
+                    className="w-full h-full bg-white/5 rounded-full pl-22 pr-8 text-xs font-bold uppercase tracking-widest border border-white/5 outline-none focus:ring-8 focus:ring-[#8b7ff0]/5 transition-all placeholder:text-zinc-600 font-sans"
                   />
                 </div>
                 
@@ -147,7 +147,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
 
              <div className="flex flex-wrap items-center justify-between gap-6 pt-10 border-t border-white/5">
                 <div className="flex items-center gap-4">
-                   <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Mode of Insight:</span>
+                   <span className="text-[10px] font-bold uppercase tracking-widest text-white/30">Mode of Insight:</span>
                    <div className="flex gap-2">
                       {[
                         { id: 'all', icon: Sparkles, label: 'Everything' },
@@ -159,7 +159,7 @@ export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
                           key={m.id}
                           onClick={() => setFormat(m.id as any)}
                           className={cn(
-                            "h-12 px-6 rounded-full flex items-center gap-3 text-[10px] font-black uppercase tracking-widest transition-all",
+                            "h-12 px-6 rounded-full flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest transition-all",
                             format === m.id ? "bg-white text-black" : "bg-white/5 text-white/40 hover:bg-white/10"
                           )}
                         >

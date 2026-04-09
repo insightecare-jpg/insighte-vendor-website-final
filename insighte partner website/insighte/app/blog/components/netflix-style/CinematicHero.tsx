@@ -84,7 +84,7 @@ export function CinematicHero({ view, coverMetadata, topics, isShareOpen, setIsS
               </div>
            </div>
            <div className="h-px w-20 bg-white/20 hidden md:block" />
-           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/50">{coverMetadata.issue} — {coverMetadata.date}</span>
+           <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/50">{coverMetadata.issue} — {coverMetadata.date}</span>
         </motion.div>
 
         <motion.div
@@ -94,9 +94,9 @@ export function CinematicHero({ view, coverMetadata, topics, isShareOpen, setIsS
            transition={{ duration: 1, ease: "easeOut" }}
            className="space-y-6"
         >
-           <h1 className="text-[12vw] lg:text-[10rem] font-sans font-black tracking-tighter leading-[0.75] uppercase italic text-white drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] selection:bg-white selection:text-black">
+           <h1 className="text-[10vw] lg:text-[8rem] font-sans font-extrabold tracking-tighter leading-[0.85] uppercase italic text-white drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] selection:bg-[#8b7ff0] selection:text-white">
               {coverMetadata.title}<br/>
-              <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
+              <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.6)' }}>
                 {coverMetadata.titleAccent}
               </span>
            </h1>

@@ -1,73 +1,67 @@
+"use client";
+
 import React from "react";
-import Link from "next/link";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { CheckCircle2 } from "lucide-react";
+import ProgramTemplate from "@/components/programs/ProgramTemplate";
 
-export const metadata = {
-  title: "Special Education | Insighte Programs",
-  description: "Personalized learning strategies to overcome academic hurdles.",
-};
-
-export default function SpecialEducationPage() {
+export default function SpecialEducationProgram() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0d0f1a] font-sans text-white">
-      <Navbar />
-      <main className="flex-1 pt-24 pb-20">
-        
-        {/* HERO */}
-        <section className="px-6 py-20 max-w-5xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#8b7ff0] text-xs font-bold uppercase tracking-widest mb-6">
-            Learning Support
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-[#f0ece4]" style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>
-            Special Education
-          </h1>
-          <p className="text-[#8a8591] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-            A core part of our framework focused on identifying specific learning needs through clinical diagnosis and bridging academic gaps with structured interventions.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/triage" className="px-8 py-4 rounded-full bg-white text-[#0d0f1a] font-black uppercase text-xs tracking-widest hover:bg-[#8b7ff0] hover:text-white transition-colors shadow-2xl">
-              Find an Educator
-            </Link>
-          </div>
-        </section>
-
-        {/* DETAILS */}
-        <section className="px-6 py-12 max-w-4xl mx-auto">
-          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 md:p-12">
-            <h2 className="text-2xl font-bold mb-6 text-white border-b border-white/10 pb-4">Core Principles</h2>
-            <div className="grid md:grid-cols-2 gap-8 text-[#e0daea]">
-              <div>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Translating clinical diagnosis into actionable, personalized learning strategies.</span>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Forms the foundation for creating robust Individualized Education Programs (IEPs).</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Guides classroom behavior and therapeutic support concurrently.</span>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Available as a standalone service or integrated into Homecare.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-      </main>
-      <Footer />
-    </div>
+    <ProgramTemplate 
+      title="Special Ed"
+      subtitle="The Learning Blueprint"
+      heroImage="https://images.unsplash.com/photo-1576091160550-217359f4ecf8?q=80&w=2940&auto=format&fit=crop"
+      accentColor="#5DCAA5"
+      description="Identifying specific learning needs through clinical diagnostics and creating actionable, personalized learning strategies that bridge the gap between potential and performance."
+      services={[
+        "Diagnostic Assessments",
+        "Remedial Education",
+        "IEP Design & Mentorship",
+        "Literacy & Numeracy Support",
+        "Study Skills Coaching",
+        "School Accommodation Planning"
+      ]}
+      features={[
+        {
+          title: "Multi-sensory Instruction",
+          description: "We use Orton-Gillingham and other evidence-based pathways to teach children who learn differently."
+        },
+        {
+          title: "Strengths-Based IEPs",
+          description: "Our learning plans focus on the child's leverage points, not just their deficits."
+        },
+        {
+          title: "Adaptive Tech Integration",
+          description: "Training in tools that help with dyslexia, dysgraphia, and processing delays."
+        },
+        {
+          title: "Transition Readiness",
+          description: "Preparing students for board exams (NIOS, IGCSE) and college transitions."
+        }
+      ]}
+      process={[
+        "Baseline Cognitive Review",
+        "Strategy Development",
+        "Weekly Implementation",
+        "Monthly Progress Mapping"
+      ]}
+      benefits={[
+        {
+          title: "Academic Confidence",
+          description: "When children understand *how* they learn, they stop feeling 'stupid' and start feeling capable."
+        },
+        {
+          title: "Clear Developmental Roadmaps",
+          description: "Parents get a granular monthly view of exactly where the learning gaps are closing."
+        },
+        {
+          title: "Reduced Homework Friction",
+          description: "Strategies that make after-school work more efficient and less combative."
+        }
+      ]}
+      experts={[
+        { name: "Kavita B.", role: "Senior Special Educator", impact: "Dyslexia Specialist", image: "https://i.pravatar.cc/300?u=kavita" },
+        { name: "Deepak S.", role: "LD Consultant", impact: "NIOS/IGCSE Advisor", image: "https://i.pravatar.cc/300?u=deepak" },
+        { name: "Rina M.", role: "Remedial Instructor", impact: "Multi-sensory Teaching", image: "https://i.pravatar.cc/300?u=rina" }
+      ]}
+    />
   );
 }

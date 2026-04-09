@@ -77,7 +77,7 @@ export function ContentRail({ title, subtitle, posts, accentColor = "#D3C4B5" }:
 
                 {/* Info Block */}
                 <div className="absolute bottom-6 left-6 right-6 z-10 space-y-3">
-                  <div className="flex items-center gap-3 text-[9px] font-black uppercase tracking-widest text-white/40">
+                  <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-widest text-white/40">
                      <span>{post.category}</span>
                      <div className="w-1 h-1 rounded-full bg-zinc-700" />
                      <span>{post.reading_time_minutes} Mins</span>

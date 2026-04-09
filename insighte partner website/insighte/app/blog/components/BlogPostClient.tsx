@@ -308,7 +308,7 @@ export default function BlogPostClient({ post }: { post: any }) {
                <div className={cn("h-px flex-grow opacity-10", st.contentLine)} />
             </div>
             
-            <h1 className={cn("text-7xl md:text-[9rem] font-sans font-black tracking-tighter leading-[0.75] uppercase italic transition-colors drop-shadow-2xl", theme === 'dark' ? 'text-white' : 'text-[#1A1A1A]')}>
+            <h1 className={cn("text-5xl md:text-7xl font-sans font-extrabold tracking-tighter leading-[1.1] uppercase italic transition-colors drop-shadow-2xl", theme === 'dark' ? 'text-white' : 'text-[#1A1A1A]')}>
               {post.title_en}
             </h1>
 
@@ -318,7 +318,7 @@ export default function BlogPostClient({ post }: { post: any }) {
                     <img src={`https://i.pravatar.cc/100?u=${post.id}`} alt="Instructor" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex flex-col">
-                     <span className="text-xs font-black uppercase tracking-widest leading-none mb-1 text-white">Clinical Instructor</span>
+                     <span className="text-xs font-bold uppercase tracking-widest leading-none mb-1 text-white">Clinical Instructor</span>
                      <span className="text-[9px] font-bold text-[#D3C4B5] italic uppercase tracking-widest">Lead Care Specialist</span>
                   </div>
                </div>

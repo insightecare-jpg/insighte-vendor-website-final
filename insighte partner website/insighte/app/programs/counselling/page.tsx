@@ -1,73 +1,67 @@
+"use client";
+
 import React from "react";
-import Link from "next/link";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { CheckCircle2 } from "lucide-react";
+import ProgramTemplate from "@/components/programs/ProgramTemplate";
 
-export const metadata = {
-  title: "Counselling | Insighte Programs",
-  description: "Inclusive, compassionate care that strengthens both children and families.",
-};
-
-export default function CounsellingPage() {
+export default function CounsellingProgram() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0d0f1a] font-sans text-white">
-      <Navbar />
-      <main className="flex-1 pt-24 pb-20">
-        
-        {/* HERO */}
-        <section className="px-6 py-20 max-w-5xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#8b7ff0] text-xs font-bold uppercase tracking-widest mb-6">
-            Psychological Support
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-[#f0ece4]" style={{ fontFamily: "'DM Serif Display', Georgia, serif" }}>
-            Counselling & Therapy
-          </h1>
-          <p className="text-[#8a8591] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
-            Neurodiversity-affirming care provided by expert child psychologists. We focus on helping families and children navigate emotional and behavioral challenges with deep empathy.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/triage" className="px-8 py-4 rounded-full bg-white text-[#0d0f1a] font-black uppercase text-xs tracking-widest hover:bg-[#8b7ff0] hover:text-white transition-colors shadow-2xl">
-              Talk to an Expert
-            </Link>
-          </div>
-        </section>
-
-        {/* DETAILS */}
-        <section className="px-6 py-12 max-w-4xl mx-auto">
-          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 md:p-12">
-            <h2 className="text-2xl font-bold mb-6 text-white border-b border-white/10 pb-4">Our Approach</h2>
-            <div className="grid md:grid-cols-2 gap-8 text-[#e0daea]">
-              <div>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Inclusive, compassionate care that empowers rather than 'fixes'.</span>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Tools for managing anxiety, emotional regulation, and stress.</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Support for navigating family dynamics and caregiving burnout.</span>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <CheckCircle2 className="w-6 h-6 text-[#1d9e75] shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">Trauma-informed care for neurodiverse children.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-      </main>
-      <Footer />
-    </div>
+    <ProgramTemplate 
+      title="Counselling"
+      subtitle="Psychological Resilience"
+      heroImage="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2787&auto=format&fit=crop"
+      accentColor="#F0997B"
+      description="Licensed child psychologists and developmental therapists helping with anxiety, school transitions, emotional regulation, and family dynamics using neuro-affirmative frameworks."
+      services={[
+        "Play-Based Therapy",
+        "CBT for Adolescents",
+        "Family Systems Counselling",
+        "Trauma-Informed Care",
+        "Anxiety Management",
+        "Executive Function Coaching"
+      ]}
+      features={[
+        {
+          title: "Neuro-Affirmative Approach",
+          description: "We don't try to 'cure' neurodivergence; we help build self-advocacy and emotional resilience within it."
+        },
+        {
+          title: "Safe Disclosure Spaces",
+          description: "A private, high-trust environment for children and teens to express what they cannot in school or social settings."
+        },
+        {
+          title: "Therapeutic Continuity",
+          description: "Our psychologists work with our shadows and OT team to ensure a 360-degree support ecosystem."
+        },
+        {
+          title: "Parental Support Circles",
+          description: "Dedicated sessions for parents to manage their own mental health and caregiver burnout."
+        }
+      ]}
+      process={[
+        "Initial Intake Interview",
+        "Clinical Observation",
+        "Therapeutic Goal Setting",
+        "Ongoing Support Cycles"
+      ]}
+      benefits={[
+        {
+          title: "Emotional Regulation",
+          description: "Equipping children with the internal tools to manage big feelings and sensory storms."
+        },
+        {
+          title: "Improved Family Cohesion",
+          description: "Helping parents and siblings understand and support the child's perspective more effectively."
+        },
+        {
+          title: "Social Confidence",
+          description: "Building the self-esteem necessary to navigate difficult social environments."
+        }
+      ]}
+      experts={[
+        { name: "Dr. Aruna R.", role: "Clinical Psychologist", impact: "Developmental Specialist", image: "https://i.pravatar.cc/300?u=aruna" },
+        { name: "Kevin J.", role: "Adolescent Counselor", impact: "Teen Resilience Coach", image: "https://i.pravatar.cc/300?u=kevin" },
+        { name: "Sofia L.", role: "Play Therapist", impact: "Early Emotional Support", image: "https://i.pravatar.cc/300?u=sofia" }
+      ]}
+    />
   );
 }

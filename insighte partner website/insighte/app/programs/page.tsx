@@ -308,13 +308,13 @@ export default function ProgramsPage() {
                   <h3 className="text-xl font-black text-white mb-2 leading-tight">
                     {course.name}
                   </h3>
-                  <p className="text-[10px] font-black text-[#5DCAA5] uppercase tracking-widest mb-4">
+                  <p className="text-[10px] font-semibold text-[#5DCAA5] uppercase tracking-widest mb-4">
                     {course.format} • {course.level}
                   </p>
                   <p className="text-sm text-[#8a8591] mb-8 leading-relaxed font-medium">
                     {course.desc}
                   </p>
-                  <Link href="/courses" className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[#8b7ff0] hover:bg-[#8b7ff0] hover:text-white transition-all active:scale-95">
+                  <Link href="/courses" className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest text-[#8b7ff0] hover:bg-[#8b7ff0] hover:text-white transition-all active:scale-95">
                     <BookOpen className="w-4 h-4" /> Enroll Now
                   </Link>
                 </div>
