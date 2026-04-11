@@ -28,7 +28,7 @@ const WHY_ITEMS = [
   {
     icon: <ShieldCheck className="w-5 h-5" aria-hidden="true" />,
     title: "Vetted Sovereignty",
-    desc: "Every specialists goes through a 4-step verification process before joining."
+    desc: "Every specialist goes through a 4-step verification process before joining."
   },
   {
     icon: <Heart className="w-5 h-5" aria-hidden="true" />,

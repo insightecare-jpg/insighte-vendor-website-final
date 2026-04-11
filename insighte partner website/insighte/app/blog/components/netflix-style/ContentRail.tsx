@@ -42,7 +42,7 @@ export function ContentRail({ title, subtitle, posts, accentColor = "#D3C4B5" }:
         </div>
         
         <Link href={`#${title.toLowerCase().replace(/\s+/g, '-')}`} className="text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition-colors border-b border-transparent hover:border-white pb-1">
-          View All Class
+          View All
         </Link>
       </div>
 
