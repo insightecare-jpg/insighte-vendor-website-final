@@ -72,62 +72,74 @@ export default function ProgramTemplate({
         </section>
 
         {/* SERVICES & FEATURES */}
-        <section className="px-6 max-w-7xl mx-auto -mt-20 relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <section className="px-6 max-w-7xl mx-auto -mt-32 relative z-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
              {/* Main Info Card */}
-             <div className="lg:col-span-2 p-12 rounded-[48px] bg-[#16172B] border border-white/5 shadow-2xl space-y-12">
-                <div>
-                   <h2 className="text-3xl font-bold uppercase tracking-tighter italic mb-8">What we provide</h2>
+             <div className="lg:col-span-8 p-12 lg:p-16 rounded-[4rem] bg-zinc-900/50 backdrop-blur-3xl border border-white/10 shadow-3xl space-y-16">
+                <div className="space-y-10">
+                   <div className="space-y-2">
+                      <span className="text-[10px] font-black text-[#8b7ff0] uppercase tracking-[0.4em]">Scope</span>
+                      <h2 className="text-4xl font-black uppercase tracking-tighter italic">Clinical <span className="text-zinc-500">Provisions.</span></h2>
+                   </div>
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {services.map(svc => (
-                        <div key={svc} className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-all">
-                           <div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10" style={{ color: accentColor }}>
-                              <CheckCircle2 size={16} />
+                        <div key={svc} className="flex items-center gap-5 p-6 rounded-3xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition-all group">
+                           <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-[#8b7ff0]/10 text-[#8b7ff0] group-hover:scale-110 transition-transform">
+                              <CheckCircle2 size={20} />
                            </div>
-                           <span className="text-sm font-bold uppercase tracking-wide">{svc}</span>
+                           <span className="text-xs font-black uppercase tracking-widest text-[#D3C4B5]">{svc}</span>
                         </div>
                       ))}
                    </div>
                 </div>
 
-                <div>
-                   <h2 className="text-3xl font-bold uppercase tracking-tighter italic mb-8">Core Features</h2>
-                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-10 pt-16 border-t border-white/5">
+                   <div className="space-y-2">
+                       <span className="text-[10px] font-black text-[#5DCAA5] uppercase tracking-[0.4em]">Mechanics</span>
+                       <h2 className="text-4xl font-black uppercase tracking-tighter italic">Core <span className="text-zinc-500">Framework.</span></h2>
+                   </div>
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                       {features.map(f => (
-                        <div key={f.title} className="space-y-3">
-                           <h4 className="font-black text-[#8b7ff0] uppercase text-[10px] tracking-widest">{f.title}</h4>
-                           <p className="text-zinc-400 text-sm leading-relaxed">{f.description}</p>
+                        <div key={f.title} className="space-y-4">
+                           <h4 className="font-black text-white uppercase text-xs tracking-[0.2em] italic border-b border-white/5 pb-2 inline-block">{f.title}</h4>
+                           <p className="text-zinc-400 text-sm leading-relaxed font-medium italic opacity-80">{f.description}</p>
                         </div>
                       ))}
                    </div>
                 </div>
              </div>
 
-             {/* Side Enquiry Card */}
-             <div className="p-10 rounded-[48px] bg-white text-black flex flex-col justify-between">
-                <div className="space-y-8">
-                   <div className="h-16 w-16 rounded-3xl bg-[#0d0f1a] text-white flex items-center justify-center">
-                      <ShieldCheck size={32} />
+             {/* Side Action Card */}
+             <div className="lg:col-span-4 p-12 rounded-[4rem] bg-white text-black flex flex-col justify-between shadow-4xl transform lg:rotate-1">
+                <div className="space-y-10">
+                   <div className="h-20 w-20 rounded-[2rem] bg-black text-white flex items-center justify-center shadow-2xl">
+                      <ShieldCheck size={40} />
                    </div>
-                   <h3 className="text-4xl font-black uppercase tracking-tighter leading-none italic">
-                      Ready to start the journey?
-                   </h3>
-                   <p className="font-medium opacity-60">
-                      Our intake specialists are available for a 1:1 clinical consultation today.
-                   </p>
+                   <div className="space-y-4">
+                      <h3 className="text-5xl font-black uppercase tracking-tighter italic leading-[0.8]">
+                         Initiate <br/><span className="text-zinc-400">Intake.</span>
+                      </h3>
+                      <p className="font-medium text-zinc-600 italic">
+                         Connect with our clinical lead to map this program to your child's specific IEP goals.
+                      </p>
+                   </div>
                 </div>
 
-                <div className="space-y-4 pt-10">
-                   <Link href="/book" className="w-full py-6 rounded-2xl bg-black text-white font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 hover:bg-[#8b7ff0] transition-colors">
-                      Book Now <ArrowUpRight size={18} />
+                <div className="space-y-4 pt-16">
+                   <Link href="/book" className="w-full h-20 rounded-[2rem] bg-black text-white font-black uppercase text-xs tracking-[0.2em] flex items-center justify-center gap-4 hover:bg-[#8b7ff0] transition-all shadow-xl group active:scale-95">
+                      Secure Slot <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform" />
                    </Link>
-                   <button className="w-full py-6 rounded-2xl bg-black/5 border border-black/10 text-black font-black uppercase text-xs tracking-widest hover:bg-black/10 transition-colors">
+                   <button className="w-full h-20 rounded-[2rem] bg-white border-2 border-black/5 text-black font-black uppercase text-xs tracking-[0.2em] hover:bg-black/5 transition-all text-center">
                       Enquire via WhatsApp
                    </button>
+                   <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-zinc-400 uppercase tracking-widest pt-4">
+                      <Clock className="h-4 w-4" /> Responds in &lt; 2 Hours
+                   </div>
                 </div>
              </div>
           </div>
         </section>
+
 
         {/* PROCESS FLOW */}
         <section className="py-40 px-6 max-w-7xl mx-auto">

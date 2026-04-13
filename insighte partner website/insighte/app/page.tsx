@@ -15,6 +15,7 @@ import { SchoolLogoScroll } from "@/components/ui/school-logo-scroll";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { InteractiveHero } from "@/components/home/interactive-hero";
+import { getFeaturedProviders } from "@/lib/actions/providers";
 
 // ─── DATA DELEGATES ───────────────────────────────────────────────────────────
 const HOW_STEPS = [
@@ -43,7 +44,14 @@ const WHY_ITEMS = [
 ];
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
-export default function InsighteHome() {
+export default async function InsighteHome() {
+  let featuredExperts: any[] = [];
+  try {
+    featuredExperts = await getFeaturedProviders();
+  } catch (err) {
+    console.error("Critical Failure in Hero Data Protocol:", err);
+  }
+
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden"
       style={{ background: "#0d0f1a", color: "#e8e2d8", fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
@@ -52,7 +60,7 @@ export default function InsighteHome() {
       <main id="main-content" className="relative pt-24 pb-24">
 
         {/* ═══ INTERACTIVE HERO & SEARCH ════════════════════════════════════════════ */}
-        <InteractiveHero />
+        <InteractiveHero initialExperts={featuredExperts} />
 
         {/* ═══ HOW IT WORKS ════════════════════════════════════════════════════ */}
         <section style={{ padding: "0 24px 60px", maxWidth: 1200, margin: "0 auto" }}>

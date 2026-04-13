@@ -1,0 +1,10 @@
+- Always use TypeScript strict mode
+- All money values stored as integers (minor units). Display layer converts using Intl.NumberFormat
+- All datetimes stored as UTC timestamptz. UI converts to user's timezone using Intl.DateTimeFormat
+- Use Supabase server client (createServerComponentClient) in Server Components and API routes, browser client (createClientComponentClient) in Client Components only
+- Never expose SUPABASE_SERVICE_ROLE_KEY to the client
+- Every API route must verify the user's JWT and role before touching the database
+- RLS is the last line of defence — always write it, never assume the app layer is sufficient
+- Run `supabase db push` after any migration change
+- Stripe webhook signature must be verified at `app/api/stripe/webhook/route.ts` using `stripe.webhooks.constructEvent`
+- Error boundaries and loading states are required on every dashboard page

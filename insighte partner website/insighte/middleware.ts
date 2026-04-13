@@ -2,9 +2,9 @@ import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 
 const protectedRoutes: Record<string, string[]> = {
-  "/parent": ["PARENT"],
-  "/provider": ["PROVIDER"],
-  "/admin": ["ADMIN"],
+  "/parent": ["client"],
+  "/provider": ["expert", "provider"],
+  "/admin": ["admin"],
 };
 
 export async function middleware(request: NextRequest) {
@@ -40,36 +40,81 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   const pathname = request.nextUrl.pathname;
 
-  // Redirect unauthenticated users to login
-  const isProtected = Object.keys(protectedRoutes).some((route) =>
-    pathname === route || pathname.startsWith(route + "/")
-  );
-  if (isProtected && !user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("redirect", pathname);
-    return NextResponse.redirect(url);
+  // Allow auth and public paths
+  const isPublicPath = 
+    pathname.startsWith("/auth") || 
+    pathname.startsWith("/login") || 
+    pathname.startsWith("/signup") || 
+    pathname === "/" ||
+    pathname.startsWith("/api");
+
+  // Protect paths based on role
+  let isProtected = false;
+  let requiredRoles: string[] = [];
+  let authType: "admin" | "expert" | "client" = "client";
+  
+  for (const [route, roles] of Object.entries(protectedRoutes)) {
+    if (pathname === route || pathname.startsWith(route + "/")) {
+      isProtected = true;
+      requiredRoles = roles;
+      if (route === "/admin") authType = "admin";
+      else if (route === "/provider") authType = "expert";
+      else authType = "client";
+      break;
+    }
+  }
+
+  // Only perform auth check if it's a protected path OR we need to redirect away from auth pages
+  const needsAuthCheck = isProtected || (!isPublicPath && (pathname.startsWith("/auth") || ["/login", "/register", "/signup"].includes(pathname)));
+
+  let activeUser = null;
+  let appRole = undefined;
+
+  if (needsAuthCheck) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    // BYPASS MECHANISM FOR DEVELOPMENT
+    const devRole = request.cookies.get('insighte-dev-role')?.value;
+    activeUser = user;
+    appRole = user?.app_metadata?.app_role as string | undefined;
+
+    if (!user && devRole && process.env.NODE_ENV === 'development') {
+      appRole = devRole;
+      activeUser = { id: '00000000-0000-0000-0000-000000000000', email: `dev-${devRole}@insighte.com` } as any;
+    }
+  }
+
+  if (isPublicPath) {
+    return supabaseResponse;
+  }
+
+  if (isProtected) {
+    if (!activeUser) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/auth/${authType}/login`;
+      url.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(url);
+    }
+    
+    if (!appRole || !requiredRoles.includes(appRole)) {
+      const url = request.nextUrl.clone();
+      if (appRole === "provider") url.pathname = "/provider/dashboard";
+      else if (appRole === "admin") url.pathname = "/admin/dashboard";
+      else url.pathname = "/parent/dashboard";
+      return NextResponse.redirect(url);
+    }
   }
 
   // Redirect authenticated users away from auth pages
-  if (user && ["/login", "/signup"].includes(pathname)) {
+  if (activeUser && (pathname.startsWith("/auth") || ["/login", "/register", "/signup"].includes(pathname)) && !pathname.includes("callback")) {
     const url = request.nextUrl.clone();
-    // Fetch user role from DB to redirect correctly
-    const { data: profile } = await supabase
-      .from("users")
-      .select("role")
-      .eq("id", user.id)
-      .single();
-
-    if (profile?.role === "PROVIDER") url.pathname = "/provider/dashboard";
-    else if (profile?.role === "ADMIN") url.pathname = "/admin/dashboard";
-    else url.pathname = "/dashboard";
+    if (appRole === "provider") url.pathname = "/provider/dashboard";
+    else if (appRole === "admin") url.pathname = "/admin/dashboard";
+    else url.pathname = "/parent/dashboard";
     return NextResponse.redirect(url);
   }
 

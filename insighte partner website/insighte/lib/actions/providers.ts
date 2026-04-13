@@ -24,6 +24,24 @@ export async function getPublicProviders() {
   return data || [];
 }
 
+export async function getFeaturedProviders() {
+  const supabase = await createClient();
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from('partners')
+    .select('*, services(*)')
+    .eq('is_featured', true)
+    .limit(10);
+
+  if (error) {
+    console.error("Error fetching featured partners:", error.message);
+    return [];
+  }
+
+  return data || [];
+}
+
 export async function getProviderById(identifier: string) {
   const supabase = await createClient();
   if (!supabase) return null;
@@ -60,48 +78,18 @@ export async function seedInitialProviders() {
 
   const initialPartners = [
     {
-      name: "Dr. Aradhana Sharma",
-      category: "insighte",
-      bio: "12 years clinical excellence. Expert in early childhood language development and neuro-affirming support strategies.",
-      slug: "aradhana-sharma",
-      languages: ["English", "Hindi", "Kannada"],
-      profile_image: "https://images.unsplash.com/photo-1559839734-2b71f1536783?q=80&w=2600&auto=format&fit=crop",
-      verified: true,
-      experience_years: 12,
-      city: "Bangalore",
-      specializations: ["Speech", "Early Detection"],
-      education: [
-        { school: "National Institute of Speech & Hearing", degree: "Ph.D. in Speech-Language Pathology", year: "2012" },
-        { school: "University of Mysore", degree: "M.Sc. in Audiology", year: "2008" }
-      ],
-      work_experience: [
-        { company: "Fortis Hospitals", role: "Head of Speech Therapy", duration: "2015 - Present" },
-        { company: "Manipal Hospitals", role: "Senior Consultant", duration: "2012 - 2015" }
-      ],
-      location_type: ["clinic", "home"],
-      availability_timing: ["Morning", "Afternoon"]
+      name: "Dr. Priya Sharma",
+      category: "Therapy",
+      bio: "Clinical psychologist specializing in neuro-developmental support and family guidance through evidence-based ABA therapy.",
+      slug: "priya-sharma",
+      verified: true
     },
     {
-      name: "Manish Verma",
-      category: "premium",
-      bio: "ABA Specialist focused on behavioral models and neuro-inclusive progress in clinical settings.",
-      slug: "manish-verma",
-      languages: ["English", "Hindi"],
-      profile_image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=2600&auto=format&fit=crop",
-      verified: true,
-      experience_years: 8,
-      city: "Mumbai",
-      specializations: ["Behavioral Therapy", "OT"],
-      education: [
-        { school: "TISS Mumbai", degree: "Masters in Applied Psychology", year: "2016" },
-        { school: "BCBA Institute", degree: "Certified Behavior Analyst", year: "2017" }
-      ],
-      work_experience: [
-        { company: "Insighte Mumbai", role: "Lead Behavioral Specialist", duration: "2019 - Present" },
-        { company: "Child Development Centre", role: "Behavioral Therapist", duration: "2016 - 2019" }
-      ],
-      location_type: ["clinic"],
-      availability_timing: ["Evening"]
+      name: "Mr. Rahul Iyer",
+      category: "Speech Therapy",
+      bio: "Dedicated speech-language pathologist helping children overcome communication hurdles with fun, engaging virtual sessions.",
+      slug: "rahul-iyer",
+      verified: true
     }
   ];
 
@@ -117,24 +105,24 @@ export async function seedInitialProviders() {
     // 1. Services
     await supabase.from('services').upsert([
       { 
-        partner_id: partner.id, 
+        provider_id: partner.id, 
         title: "Sanctuary Momentum Session",
         price: partner.category === 'insighte' ? 1800 : 2200,
         duration: 60,
         type: "1:1 Video Call",
         description: "A deep-dive clinical session focused on immediate progress."
       }
-    ], { onConflict: 'partner_id, title' });
+    ], { onConflict: 'provider_id, title' });
 
     // 2. Reviews (Mock data)
     await supabase.from('reviews').upsert([
       {
-        partner_id: partner.id,
+        provider_id: partner.id,
         parent_name: "Anita Deshmukh",
         rating: 5,
         content: `Amazing progress with ${partner.name.split(' ')[0]}. The neuro-affirming approach really works for our son.`
       }
-    ], { onConflict: 'partner_id, content' }).select();
+    ], { onConflict: 'provider_id, content' }).select();
 
     // 3. Slots (Next 3 days)
     const today = new Date();
@@ -145,7 +133,7 @@ export async function seedInitialProviders() {
       const end = new Date(date);
       end.setHours(11, 0, 0, 0);
       return {
-        partner_id: partner.id,
+        provider_id: partner.id,
         start_time: date.toISOString(),
         end_time: end.toISOString(),
         status: 'available'

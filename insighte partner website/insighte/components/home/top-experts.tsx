@@ -87,28 +87,33 @@ const FEATURED_EXPERTS = [
 
 interface TopExpertsProps {
   zone?: Zone | null;
+  initialExperts?: any[];
 }
 
-export function TopExperts({ zone }: TopExpertsProps) {
+export function TopExperts({ zone, initialExperts = [] }: TopExpertsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
+  const baseExperts = useMemo(() => {
+    return initialExperts.length > 0 ? initialExperts : FEATURED_EXPERTS;
+  }, [initialExperts]);
+
   const filteredExperts = useMemo(() => {
-    if (!zone || !zone.city || zone.city === "Global") return FEATURED_EXPERTS;
+    if (!zone || !zone.city || zone.city === "Global") return baseExperts;
     
     // Exact city match
-    const local = FEATURED_EXPERTS.filter(e => 
-      e.city.toLowerCase() === zone.city.toLowerCase()
+    const local = baseExperts.filter(e => 
+      e.city?.toLowerCase() === zone.city.toLowerCase()
     );
 
     // If no local, show online/featured but add a label
-    return local.length > 0 ? local : FEATURED_EXPERTS;
-  }, [zone]);
+    return local.length > 0 ? local : baseExperts;
+  }, [zone, baseExperts]);
 
   const isShowingFallback = useMemo(() => {
     if (!zone || !zone.city || zone.city === "Global") return false;
-    return !FEATURED_EXPERTS.some(e => e.city.toLowerCase() === zone.city.toLowerCase());
-  }, [zone]);
+    return !baseExperts.some(e => e.city?.toLowerCase() === zone.city.toLowerCase());
+  }, [zone, baseExperts]);
 
   useEffect(() => {
     let ctx: any;

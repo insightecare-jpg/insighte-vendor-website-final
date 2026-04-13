@@ -23,8 +23,8 @@ export async function fetchSearchPartners({
   const from = page * pageSize;
   const to = from + pageSize - 1;
 
-  // Use the search_partners RPC
-  const { data, error, count } = await supabase.rpc("search_partners", {
+  // Use the search_partners_v2 RPC (Location Aware)
+  const { data, error, count } = await supabase.rpc("search_partners_v2", {
     search_term: searchTerm || null,
     selected_specs: selectedSpecs.length > 0 ? selectedSpecs : null,
     selected_modes: selectedModes.length > 0 ? selectedModes : null,
@@ -37,11 +37,7 @@ export async function fetchSearchPartners({
     throw error;
   }
 
-  // Handle pagination on the result of the RPC
-  // Actually, standard RPC doesn't support .range directly in the function itself without modifying it,
-  // but Supabase JS allows chaining .range() after .rpc()!
-  
-  const { data: paginatedData, error: rangeError } = await supabase.rpc("search_partners", {
+  const { data: paginatedData, error: rangeError } = await supabase.rpc("search_partners_v2", {
     search_term: searchTerm || null,
     selected_specs: selectedSpecs.length > 0 ? selectedSpecs : null,
     selected_modes: selectedModes.length > 0 ? selectedModes : null,

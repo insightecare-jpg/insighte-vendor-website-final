@@ -109,6 +109,29 @@ export default function LoginSanctuary() {
             <span className="text-[10px] font-inter text-[#919097] uppercase tracking-widest font-black italic">Insighte Sanctuary</span>
             <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-[#47464c]/50 to-transparent"></div>
           </div>
+
+          <div className="mt-8 grid grid-cols-2 gap-3">
+             <button 
+               type="button"
+               onClick={() => {
+                 document.cookie = "insighte-dev-role=admin; path=/";
+                 window.location.href = "/admin/hub";
+               }}
+               className="p-3 rounded-xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest text-[#d3c4b5] hover:bg-white/10 transition-all"
+             >
+               Admin Bypass
+             </button>
+             <button 
+               type="button"
+               onClick={() => {
+                 document.cookie = "insighte-dev-role=provider; path=/";
+                 window.location.href = "/provider/dashboard";
+               }}
+               className="p-3 rounded-xl bg-white/5 border border-white/10 text-[9px] font-black uppercase tracking-widest text-[#baccb3] hover:bg-white/10 transition-all"
+             >
+               Provider Bypass
+             </button>
+          </div>
         </section>
 
         <footer className="mt-8 text-center">

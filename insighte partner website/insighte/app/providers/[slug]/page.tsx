@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { getProviderBySlug } from "@/lib/actions/admin";
-import ProfileClient from "@/app/marketplace/[id]/ProfileClient";
+import ProfileClient from "@/app/specialists/[id]/ProfileClient";
 import { notFound } from "next/navigation";
 import { TestimonialsSection } from "@/components/ui/testimonials-section";
 import { ArrowRight } from "lucide-react";

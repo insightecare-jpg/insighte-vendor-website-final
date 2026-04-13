@@ -6,8 +6,56 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
   theme: {
     extend: {
+      typography: ({ theme }: any) => ({
+        insighte: {
+          css: {
+            '--tw-prose-body': 'var(--color-text-primary)',
+            '--tw-prose-headings': 'var(--color-text-primary)',
+            '--tw-prose-lead': 'var(--color-text-secondary)',
+            '--tw-prose-links': 'var(--color-accent)',
+            '--tw-prose-bold': 'var(--color-text-primary)',
+            '--tw-prose-quotes': 'var(--color-text-secondary)',
+            '--tw-prose-quote-borders': 'var(--color-accent)',
+            '--tw-prose-captions': 'var(--color-text-tertiary)',
+            '--tw-prose-code': 'var(--color-text-primary)',
+            '--tw-prose-pre-code': 'var(--color-text-primary)',
+            '--tw-prose-pre-bg': 'rgba(255, 255, 255, 0.05)',
+            maxWidth: '680px',
+            fontSize: '17px',
+            lineHeight: '1.75',
+            p: { marginBottom: '1.5rem' },
+            h2: { 
+              fontSize: '22px', 
+              fontWeight: '600', 
+              marginTop: '2.5rem',
+              marginBottom: '0.75rem',
+              fontFamily: 'inherit',
+              fontStyle: 'normal',
+            },
+            h3: { 
+              fontSize: '18px', 
+              fontWeight: '500', 
+              marginTop: '2rem',
+              marginBottom: '0.5rem',
+              fontFamily: 'inherit',
+              fontStyle: 'normal',
+            },
+            blockquote: {
+              fontStyle: 'italic',
+              borderLeftWidth: '3px',
+              paddingLeft: '1.5rem',
+              fontSize: '18px',
+              fontWeight: '400',
+              quotes: 'none',
+            },
+          },
+        },
+      }),
       colors: {
         primary: {
           DEFAULT: "var(--color-primary)",
@@ -56,7 +104,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
 };
 
 export default config;

@@ -164,7 +164,11 @@ function getSmartSuggestions(query: string, zone: Zone | null) {
   ];
 }
 
-export function InteractiveHero() {
+interface InteractiveHeroProps {
+  initialExperts?: any[];
+}
+
+export function InteractiveHero({ initialExperts = [] }: InteractiveHeroProps) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [query, setQuery] = useState("");
@@ -510,7 +514,7 @@ export function InteractiveHero() {
       </section>
 
       {/* ═══ TOP EXPERTS ════════════════════════════════════════════════════ */}
-      <TopExperts zone={activeZone} />
+      <TopExperts zone={activeZone} initialExperts={initialExperts} />
     </>
   );
 }

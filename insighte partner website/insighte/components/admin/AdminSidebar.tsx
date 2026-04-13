@@ -24,12 +24,10 @@ import { Button } from "@/components/ui/button";
 const ADMIN_LINKS = [
   { icon: <LayoutDashboard className="h-5 w-5" />, label: "Overview", href: "/admin" },
   { icon: <BarChart3 className="h-5 w-5" />, label: "Bookings", href: "/admin/dashboard" }, // Currently dashboard is bookings hub
-  { icon: <ShieldCheck className="h-5 w-5" />, label: "Approvals", href: "/admin/queue" },
-  { icon: <FileText className="h-5 w-5" />, label: "Wisdom Hub", href: "/admin/hub" },
+  { icon: <FileText className="h-5 w-5" />, label: "Blog", href: "/admin/hub" },
   { icon: <Users className="h-5 w-5" />, label: "Families", href: "/admin/families" },
   { icon: <Search className="h-5 w-5" />, label: "Specialists", href: "/admin/specialists" },
-  { icon: <Plus className="h-5 w-5" />, label: "Services", href: "/admin/services" },
-  { icon: <BarChart3 className="h-5 w-5" />, label: "Programs", href: "/admin/programs" },
+  { icon: <Plus className="h-5 w-5" />, label: "Programs", href: "/admin/programs" },
   { icon: <Settings className="h-5 w-5" />, label: "Settings", href: "/admin/settings" },
 ];
 

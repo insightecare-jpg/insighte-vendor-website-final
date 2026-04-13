@@ -1,0 +1,94 @@
+# The Sanctuary Doctrine: UI/UX & Engineering Manifesto
+*Version 2.1 — Updated April 2026 (Educator Sanctuary Expansion)*
+
+## 🏛️ 1. The Soul: Philosophy & Ethics
+We don't just build features; we encode values. Every interaction in the Insighte Care Platform must adhere to these core human-centric rules:
+
+### Connection Before Correction
+Technical errors are stressful, especially for parents and neurodivergent users.
+- **The Technical Rule**: Zero "hard failures" in UI. 
+- **The UX Rule**: If a user makes an error, the system must respond with empathetic, supportive microcopy. Use **Optimistic UI** patterns—the screen updates instantly, assuming success, to maintain a feeling of progress.
+
+### Neuro-Affirmative & Child-First
+Design for focus, not for distraction.
+- **Motion**: Mandatory `prefers-reduced-motion` support. No flickering, no aggressive autoplay.
+- **Cognitive Load**: Use **Progressive Disclosure**. Never overwhelm the user with data they didn't ask for.
+- **Aesthetics**: Premium, calming, and high-contrast without being harsh.
+
+### Educator-First Doctrine (The Sanctuary Rule)
+We transition from "clinical" to "expert/educator" language to preserve the human connection.
+- **Terminology**: Avoid medical/legacy jargon. Use **Revenue** instead of Yield, **Expert Assessment** instead of Clinical Evaluation, and **Session Notes** instead of Clinical Notes.
+- **Agency**: The expert is the steward of the relationship. The UI must empower their expertise, not automate it into a ledger.
+
+---
+
+## 🎨 2. The Body: Visual Language & Tokens
+The "Sanctuary" aesthetic is a **Dark Monolith** with weightless, glassmorphic accents.
+
+### Color Mastery (The Sanctuary Palette)
+- **Deep Void**: `#0F1117` (Global Background)
+- **Vessel Navy**: `#1D1E31` (Cards & Surfaces)
+- **Primary Accent**: `#BACCB3` (Sage Green — Symbol of Growth & Success)
+- **Institutional Tan**: `#D3C4B5` (Muted Gold — Symbol of Trust & Heritage)
+- **Operational Amber**: `#F59E0B` (Alerts & Private States)
+- **Danger**: `#FF4D4D` (Alert Red)
+
+---
+
+## 🏛️ 3. The Triple-Layer UI Architecture
+
+### Layer 1: The Public Discovery Interface (The "Storefront")
+- **Style**: Netflix-inspired horizontal scrolling carousels.
+- **Goal**: Discovery and Engagement.
+- **Logic**: Fluid, card-based discovery that works flawlessly on mobile "Thumb Zones".
+
+### Layer 1.5: Detailed Content & Blog (The "Knowledge Magazine")
+- **Style**: Magazine-inspired, typography-first centered layouts.
+- **Goal**: Readability, Trust, and Authority.
+- **Typography**: Heavy use of 'DM Serif Display' for headings to evoke institutional heritage.
+- **Structure**: Single-column focus on mobile; no distracting sidebars during the reading flow. High whitespace, "Institutional Tan" text on "Deep Void" background.
+- **The Magazine Rule**: Every article must feel like a premium physical magazine page—clean, balanced, and prestigious.
+
+### Layer 2: The Expert Portal (The "Educator Sanctuary")
+Dedicated to the professional educator's daily operations.
+- **The Learner Registry**: A high-density dashboard for client management. Prioritize "Impact Sessions" and "Progress Trends" over raw clinical data.
+- **Observation Protocol (Session Notes)**: A dual-visibility system.
+    - **Private**: Observations for the expert's eyes only (highlighted in Operational Amber).
+    - **Public**: Shared with the family upon confirmation (highlighted in Sage Green).
+- **The 100ms Pulse**: All schedule syncs and note-saving must feel instantaneous to respect the expert’s time.
+
+### Layer 3: The Admin Command Center (The "Governance Hub")
+Built for institutional and marketplace scale.
+- **Rule of 25 (Data Density)**: Prioritize rapid scanning. See 25–50 rows of experts/applications at once.
+- **Zero-Tab Sprawl**: Consolidate approval queues and payout ledgers into collapsible "Zones".
+
+---
+
+## ⚙️ 4. Operational Protocol: The "Handshake"
+
+### The Audit Loop
+Every administrative decision (e.g., Approving a Specialist, Suspending a Profile) must trigger a four-part "Handshake":
+1. **DB Mutation**: Immediate status update.
+2. **Audit Trail**: Permanent entry in `audit_logs`.
+3. **Notification Sync**: In-app alert pushed to the expert's dashboard.
+4. **Resend Email Support**: Formal account notification.
+
+### Clinical Sovereignty
+We respect the specialist's autonomy.
+- **Schedules**: Owned by the specialist. Admins have Read-Only access.
+- **Profile Stewardship**: Content belongs to the specialist; overrides are logged and visible.
+
+---
+
+## 🧠 5. Engineering Sovereignty
+
+### Supabase Sovereignty
+- **Postgres + RLS**: Security happens at the database level. RLS is mandatory for all tables.
+- **Migrations-Only**: Zero manual dashboard transformations.
+
+### TypeScript Absolute
+- **Strict Typing**: No `any` types. Students, Educators, and Programs must have strictly defined interfaces to prevent "Phase 2" technical debt.
+- **Performance Budget**: interaction must adhere to the 100ms Rule.
+
+---
+*Generated by Antigravity AI — Translating Midhun’s Doctrine into functional, premium requirements.*

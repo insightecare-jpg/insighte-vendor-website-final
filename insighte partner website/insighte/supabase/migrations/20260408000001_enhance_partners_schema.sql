@@ -25,6 +25,9 @@ ALTER TABLE partners ADD COLUMN IF NOT EXISTS mode text;
 -- Tagline (short headline shown on card)
 ALTER TABLE partners ADD COLUMN IF NOT EXISTS tagline text;
 
+-- Featured flag for hero sections
+ALTER TABLE partners ADD COLUMN IF NOT EXISTS is_featured boolean DEFAULT false;
+
 -- 2. Backfill city from location --------------------------------
 UPDATE partners
 SET city = TRIM(SPLIT_PART(location, ',', 1))

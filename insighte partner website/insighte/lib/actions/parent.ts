@@ -16,19 +16,19 @@ export async function getParentDashboard(parentId: string) {
   const supabase = await createClient();
   if (!supabase) return null;
 
-  const { data: parentInfo } = await supabase
-    .from('parents')
-    .select('*, children(*), bookings(*)')
-    .eq('id', parentId)
-    .single();
+  const [parentRes, childrenRes, bookingsRes] = await Promise.all([
+    supabase.from('profiles').select('*, client_code').eq('id', parentId).single(),
+    supabase.from('children').select('*, child_code').eq('user_id', parentId),
+    supabase.from('bookings').select('*, partners(name), services(title)').eq('user_id', parentId).order('start_time', { ascending: true })
+  ]);
 
-  if (!parentInfo) return null;
+  if (parentRes.error) return null;
 
   return {
-    parentInfo: { name: parentInfo.name, email: parentInfo.email },
-    children: parentInfo.children || [],
-    upcomingBookings: parentInfo.bookings?.filter((b: any) => b.status === "upcoming") || [],
-    recentSessions: [] // In a real app, join with sessions table
+    parentInfo: parentRes.data,
+    children: childrenRes.data || [],
+    upcomingBookings: bookingsRes.data?.filter((b: any) => new Date(b.start_time) > new Date()) || [],
+    recentSessions: bookingsRes.data?.filter((b: any) => new Date(b.start_time) <= new Date()) || []
   };
 }
 
@@ -38,51 +38,61 @@ export async function getUpcomingSessions(parentId: string) {
 
   const { data } = await supabase
     .from('bookings')
-    .select('*, partners(*), services(*)')
-    .eq('parent_id', parentId)
-    .eq('status', 'upcoming');
+    .select('*, partners(name), services(title)')
+    .eq('user_id', parentId)
+    .gte('start_time', new Date().toISOString())
+    .order('start_time', { ascending: true });
 
   return data || [];
 }
 
-export async function getSessionHistory(parentId: string) {
+export async function getChildProfiles(parentId: string) {
   const supabase = await createClient();
   if (!supabase) return [];
 
   const { data } = await supabase
-    .from('sessions')
-    .select('*, bookings!inner(*)')
-    .eq('bookings.parent_id', parentId);
+    .from('children')
+    .select('*, child_code')
+    .eq('user_id', parentId);
 
   return data || [];
 }
 
-export async function getPayments(parentId: string) {
+export async function addChildProfile(parentId: string, payload: any) {
   const supabase = await createClient();
-  if (!supabase) return [];
+  if (!supabase) return { error: "Client not initialized" };
 
-  const { data } = await supabase
-    .from('payments')
-    .select('*, bookings!inner(*)')
-    .eq('bookings.parent_id', parentId);
+  const { data, error } = await supabase
+    .from('children')
+    .insert({ 
+      user_id: parentId, 
+      name: payload.name, 
+      age: payload.age, 
+      clinical_notes: payload.clinical_notes,
+      diagnoses: payload.diagnoses || [],
+      milestones: payload.milestones || []
+    })
+    .select()
+    .single();
 
-  return data || [];
+  if (error) return { error: error.message };
+
+  revalidatePath("/parent/dashboard");
+  return { success: true, data };
 }
 
-export async function addChildProfile(parentId: string, formData: FormData) {
-  const name = formData.get("name") as string;
-  const age = parseInt(formData.get("age") as string);
-  const goals = formData.get("goals") as string;
-
+export async function updateChildProfile(childId: string, payload: any) {
   const supabase = await createClient();
   if (!supabase) return { error: "Client not initialized" };
 
   const { error } = await supabase
     .from('children')
-    .insert({ parent_id: parentId, name, age, goals });
+    .update(payload)
+    .eq('id', childId);
 
   if (error) return { error: error.message };
 
-  revalidatePath("/dashboard");
+  revalidatePath("/parent/dashboard");
+  revalidatePath(`/parent/children/${childId}`);
   return { success: true };
 }

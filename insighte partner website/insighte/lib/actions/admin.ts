@@ -36,7 +36,7 @@ export async function getAllBookings() {
   const supabase = await createClient();
   const { data } = await supabase
     .from('bookings')
-    .select('*, parents(*), partners(*), services(*)');
+    .select('*, profiles(*), partners(*), services(*)');
 
   return data || [];
 }
@@ -96,7 +96,7 @@ export async function getAdminBookings(): Promise<AdminBooking[]> {
       start_time,
       end_time,
       status,
-      parents ( name ),
+      profiles ( full_name ),
       partners ( name ),
       services ( category )
     `);
@@ -112,7 +112,7 @@ export async function getAdminBookings(): Promise<AdminBooking[]> {
     start_time: b.start_time,
     end_time: b.end_time || "N/A",
     status: b.status,
-    child_name: (b.parents as any)?.name || "N/A", // Correctly mapping from parent's name for now
+    child_name: (b.profiles as any)?.full_name || "N/A", // Correctly mapping from profile's name for now
     provider_name: (b.partners as any)?.name || "Unassigned",
     service_category: (b.services as any)?.category || "Specialist Care"
   }));
@@ -196,11 +196,13 @@ export async function approveProvider(providerId: string) {
 export async function getAllFamilies(): Promise<Family[]> {
   const supabase = await createClient();
   const { data } = await supabase
-    .from('parents')
-    .select('*, children(*)');
+    .from('profiles')
+    .select('*, children(*)')
+    .eq('role', 'PARENT');
 
   return (data || []).map((f: any) => ({
     ...f,
+    name: f.full_name,
     children: f.children || []
   })) as Family[];
 }
@@ -226,7 +228,7 @@ export async function getAdminStats() {
   ] = await Promise.all([
     supabase.from('partners').select('*', { count: 'exact', head: true }),
     supabase.from('bookings').select('*', { count: 'exact', head: true }),
-    supabase.from('parents').select('*', { count: 'exact', head: true })
+    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'PARENT')
   ]);
 
   return {
@@ -241,7 +243,7 @@ export async function getRecentActivity() {
   
   const { data: bookings } = await supabase
     .from('bookings')
-    .select('*, parents(name), services(title)')
+    .select('*, profiles(full_name), services(title)')
     .order('created_at', { ascending: false })
     .limit(5);
 
@@ -249,7 +251,7 @@ export async function getRecentActivity() {
     id: b.id,
     type: 'booking',
     title: 'Booking Confirmed',
-    description: `${b.parents?.name || 'Parent'} for '${b.services?.title || 'Service'}'`,
+    description: `${b.profiles?.full_name || 'Parent'} for '${b.services?.title || 'Service'}'`,
     time: b.created_at
   }));
 }

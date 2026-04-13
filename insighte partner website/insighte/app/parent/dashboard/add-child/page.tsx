@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { 
@@ -29,10 +29,25 @@ import { Textarea } from "@/components/ui/textarea";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
+import { addChildProfile } from "@/lib/actions/parent";
+import { createClient } from "@/lib/supabase/client";
+import { getMockUser, isDevBypassActive } from "@/lib/api/dev-bypass-helper";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function AddChildPage() {
   const [mounted, setMounted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const supabase = createClient();
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    age: "",
+    clinical_notes: "",
+    diagnoses: [] as string[]
+  });
 
   useEffect(() => {
     setMounted(true);
@@ -40,12 +55,46 @@ export default function AddChildPage() {
 
   if (!mounted) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      window.location.href = "/dashboard";
-    }, 1500);
+    
+    if (!formData.name) {
+      toast.error("Foundation Bio Required", { description: "Please provide the learner's name." });
+      return;
+    }
+
+    startTransition(async () => {
+      try {
+        let userId: string | null = null;
+        
+        if (isDevBypassActive()) {
+          userId = getMockUser()?.id || null;
+        } else {
+          const { data: { user } } = await supabase.auth.getUser();
+          userId = user?.id || null;
+        }
+
+        if (!userId) {
+          toast.error("Identity Lock", { description: "Please log in to register a profile." });
+          return;
+        }
+
+        const result = await addChildProfile(userId, {
+          ...formData,
+          age: formData.age ? parseInt(formData.age) : null
+        });
+
+        if (result.success) {
+          toast.success("Registry Complete", { description: "Child profile synced to the sanctuary." });
+          router.push("/parent/dashboard");
+        } else {
+          toast.error("Registry Failure", { description: result.error || "Something went wrong." });
+        }
+      } catch (err) {
+        console.error("Submission Error:", err);
+        toast.error("Clinical Error", { description: "An unexpected error occurred during registration." });
+      }
+    });
   };
 
   return (
@@ -58,8 +107,8 @@ export default function AddChildPage() {
            {/* HEADER - NEW MEMBER INTAKE */}
            <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
               <div className="flex flex-col gap-6">
-                 <Link href="/dashboard" className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-zinc-600 hover:text-white transition-all group">
-                    <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1" /> Back to Dashboard
+                 <Link href="/parent/dashboard" className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-zinc-600 hover:text-white transition-all group">
+                    <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1" /> Back to Sanctuary
                  </Link>
                  <div className="flex flex-col gap-4">
                     <Badge variant="outline" className="w-fit py-1.5 px-4 font-black tracking-widest text-[9px] uppercase bg-white/5 text-zinc-400 border-white/10 backdrop-blur-md">
@@ -95,11 +144,22 @@ export default function AddChildPage() {
                              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                                 <div className="flex flex-col gap-2">
                                    <label className="text-[10px] uppercase font-black tracking-[0.2em] text-zinc-600 ml-3">Full Legal Name</label>
-                                   <Input placeholder="Ishan" className="h-16 rounded-2xl border-white/5 bg-zinc-900/50 px-6 font-medium text-white shadow-inner focus:bg-zinc-900 transition-all" />
+                                   <Input 
+                                      value={formData.name}
+                                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                                      placeholder="Ishan" 
+                                      className="h-16 rounded-2xl border-white/5 bg-zinc-900/50 px-6 font-medium text-white shadow-inner focus:bg-zinc-900 transition-all" 
+                                   />
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                   <label className="text-[10px] uppercase font-black tracking-[0.2em] text-zinc-600 ml-3">Birth Year</label>
-                                   <Input placeholder="2018" className="h-16 rounded-2xl border-white/5 bg-zinc-900/50 px-6 font-medium text-white shadow-inner focus:bg-zinc-900 transition-all" />
+                                   <label className="text-[10px] uppercase font-black tracking-[0.2em] text-zinc-600 ml-3">Age</label>
+                                   <Input 
+                                      value={formData.age}
+                                      onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))}
+                                      placeholder="6" 
+                                      type="number"
+                                      className="h-16 rounded-2xl border-white/5 bg-zinc-900/50 px-6 font-medium text-white shadow-inner focus:bg-zinc-900 transition-all" 
+                                   />
                                 </div>
                              </div>
                           </div>
@@ -116,18 +176,20 @@ export default function AddChildPage() {
                        <div className="flex flex-col gap-4">
                           <label className="text-[10px] uppercase font-black tracking-[0.2em] text-zinc-600 ml-3">Observation Details (Optional)</label>
                           <Textarea 
+                             value={formData.clinical_notes}
+                             onChange={(e) => setFormData(prev => ({ ...prev, clinical_notes: e.target.value }))}
                              placeholder="Please share any existing clinical observations, behavioral patterns, or specific developmental goals you wish to target in this vanguard cycle..." 
                              className="min-h-[220px] rounded-[40px] border-white/5 bg-zinc-900/50 p-10 text-lg font-medium text-white shadow-inner focus:bg-zinc-900 transition-all placeholder:text-zinc-800"
                           />
                        </div>
 
                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mt-4">
-                          <Button variant="outline" className="h-20 rounded-[28px] border-white/5 bg-white/5 text-[11px] font-black uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-white/10 leading-relaxed text-left justify-start px-8 py-0 group">
+                          <Button variant="outline" type="button" className="h-20 rounded-[28px] border-white/5 bg-white/5 text-[11px] font-black uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-white/10 leading-relaxed text-left justify-start px-8 py-0 group">
                              <div className="flex items-center gap-4">
                                 <div className="h-4 w-4 rounded-full border border-white/20 group-hover:border-primary transition-all" /> Upload Vector Diagnosis (PDF)
                              </div>
                           </Button>
-                          <Button variant="outline" className="h-20 rounded-[28px] border-white/5 bg-white/5 text-[11px] font-black uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-white/10 leading-relaxed text-left justify-start px-8 py-0 group">
+                          <Button variant="outline" type="button" className="h-20 rounded-[28px] border-white/5 bg-white/5 text-[11px] font-black uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-white/10 leading-relaxed text-left justify-start px-8 py-0 group">
                              <div className="flex items-center gap-4">
                                 <div className="h-4 w-4 rounded-full border border-white/20 group-hover:border-primary transition-all" /> IEP Module Archive
                              </div>
@@ -138,10 +200,10 @@ export default function AddChildPage() {
                     {/* ACTION FINALE */}
                     <Button 
                        type="submit" 
-                       disabled={loading}
+                       disabled={isPending}
                        className="h-24 w-full rounded-[40px] bg-white text-black text-xs font-black uppercase tracking-[0.4em] shadow-2xl shadow-white/5 hover:scale-[1.03] active:scale-95 disabled:opacity-50 transition-all group overflow-hidden"
                     >
-                       {loading ? (
+                       {isPending ? (
                           <div className="flex items-center gap-3">
                              <div className="h-2 w-2 rounded-full bg-black animate-bounce [animation-delay:-0.3s]" />
                              <div className="h-2 w-2 rounded-full bg-black animate-bounce [animation-delay:-0.15s]" />

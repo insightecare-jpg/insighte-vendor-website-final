@@ -33,8 +33,8 @@ export default async function SanctuarySessions() {
 
   // Fetch Parent Data
   const { data: parent } = await supabase
-    .from("parents")
-    .select("name")
+    .from("profiles")
+    .select("full_name")
     .eq("id", user.id)
     .single();
 
@@ -43,12 +43,11 @@ export default async function SanctuarySessions() {
     .from("bookings")
     .select(`
       *,
-      provider:providers(*),
+      provider:partners(*),
       service:services(*),
       child:children(*)
     `)
-    .eq("parent_id", user.id)
-    // .in("status", ["upcoming", "confirmed"]) // Depending on how you manage status
+    .eq("user_id", user.id)
     .gte("start_time", new Date().toISOString())
     .order("start_time", { ascending: true });
 

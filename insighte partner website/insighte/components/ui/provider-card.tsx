@@ -11,6 +11,7 @@ interface Provider {
   slug?: string;
   name: string;
   avatar_url?: string | null;
+  profile_image?: string | null;
   category?: string;
   specializations?: string[];
   services?: string[];
@@ -38,12 +39,13 @@ interface ProviderCardProps {
 }
 
 export function ProviderCard({ provider, className, priority = false }: ProviderCardProps) {
-  const href = `/marketplace/${provider.slug || provider.id}`;
+  const href = `/specialists/${provider.slug || provider.id}`;
   const rating = provider.rating_avg || provider.rating || 4.9;
-  const bookings = provider.total_bookings || provider.booking_count || 120;
+  const bookings = provider.booking_count || provider.total_bookings || 120;
   const experience = provider.experience_years || 5;
-  const price = provider.consultation_fee || provider.rate || 999;
-  const expertise = (provider.specializations || provider.services || []).slice(0, 3);
+  const price = provider.first_session_price || provider.consultation_fee || provider.rate || 999;
+  const rawExpertise = (provider.specializations || provider.specialisations || provider.services || []);
+  const expertise = rawExpertise.slice(0, 3).map(tag => typeof tag === 'object' ? (tag as any).title || (tag as any).name : tag);
   
   return (
     <Link
@@ -55,18 +57,27 @@ export function ProviderCard({ provider, className, priority = false }: Provider
     >
       {/* ── IMAGE SECTION (Taller portrait) ── */}
       <div className="relative h-[320px] w-full overflow-hidden">
-        <Image
-          src={provider.avatar_url || "/images/experts/special_educator.png"}
-          alt={provider.name}
-          fill
-          priority={priority}
-          className="object-cover object-top transition-transform duration-[1.5s] group-hover:scale-110"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = "/images/experts/special_educator.png";
-          }}
-        />
-        
+        {(() => {
+          const category = (provider.category || (provider as any).provider_type || "").toLowerCase();
+          let fallback = "/images/experts/special_educator.png";
+          if (category.includes("speech")) fallback = "/images/experts/speech_therapist.png";
+          else if (category.includes("autism") || category.includes("aba")) fallback = "/images/experts/autism_specialist.png";
+          else if (category.includes("counsel") || category.includes("behavior")) fallback = "/images/experts/behavioral_specialist.png";
+          
+          return (
+            <Image
+              src={provider.avatar_url || provider.profile_image || fallback}
+              alt={provider.name}
+              fill
+              priority={priority}
+              className="object-cover object-top transition-transform duration-[1.5s] group-hover:scale-110"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = fallback;
+              }}
+            />
+          );
+        })()}
         {/* Cinematic Overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f1a] via-transparent to-black/20 opacity-100" />
         

@@ -1,0 +1,25 @@
+{
+  "Common": {
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "logout": "Logout",
+    "support": "Support",
+    "loading": "Loading Sanctuary...",
+    "error": "Clinical sync failed. Please try again."
+  },
+  "ParentDashboard": {
+    "welcome": "Welcome to your {parentName} Sanctuary",
+    "registryTitle": "Identity Registry // Learners",
+    "temporalTitle": "Temporal Pulse // Sessions",
+    "milestoneTitle": "Vanguard Progress // Milestones",
+    "clockIn": "Mirrored Clock Status",
+    "addLearner": "Register Learner",
+    "bookSpecialist": "Connect with Specialist"
+  },
+  "Booking": {
+    "title": "Select Your Specialist",
+    "reserve": "Reserve Moment",
+    "checkout": "Confirm & Pay",
+    "receiptSent": "Receipt sent to {email}"
+  }
+}

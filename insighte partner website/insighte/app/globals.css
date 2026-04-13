@@ -206,6 +206,24 @@
     background: #323347;
     @apply rounded-full;
   }
+  /* Tactile / Haptic Feedback */
+  .haptic-touch {
+    @apply active:scale-95 transition-all duration-200;
+  }
+  .haptic-touch-lg {
+    @apply active:scale-90 transition-all duration-300;
+  }
+
+  /* Safe Area / Ergonomics */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 24px);
+  }
+
+  /* Mobile Navigation Container */
+  .mobile-hub-container {
+    bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }

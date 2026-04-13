@@ -114,7 +114,7 @@ function SuccessContent() {
                 </div>
              </Link>
 
-             <Link href="/marketplace" className="group">
+             <Link href="/specialists" className="group">
                 <div className="flex items-center gap-6">
                    <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#D3C4B5] transition-all">
                       <Sparkles className="w-5 h-5 group-hover:scale-125 transition-transform" />

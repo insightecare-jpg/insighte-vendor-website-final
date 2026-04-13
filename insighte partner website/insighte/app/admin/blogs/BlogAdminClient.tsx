@@ -31,6 +31,7 @@ export default function BlogAdminClient() {
       Link.configure({ openOnClick: false }),
     ],
     content: '<p>Start writing your rich media blog here...</p>',
+    immediatelyRender: false,
     editorProps: {
       attributes: {
         class: 'prose prose-invert max-w-none focus:outline-none min-h-[300px] border border-white/10 p-6 rounded-2xl bg-white/5',

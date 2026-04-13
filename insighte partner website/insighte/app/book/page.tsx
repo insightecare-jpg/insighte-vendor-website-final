@@ -26,17 +26,24 @@ export default async function BookingJourney() {
     }
   }
 
-  // Fetch Providers
+  // Fetch Providers (Partners)
   const { data: providers } = await supabase
-    .from("providers")
-    .select("id, name, profile_image, verified")
+    .from("partners")
+    .select("id, name, avatar_url, approval_status")
+    .eq("approval_status", "LIVE")
     .order("name");
+
+  const formattedProviders = providers?.map(p => ({
+     ...p,
+     profile_image: p.avatar_url,
+     verified: p.approval_status === 'LIVE' || p.approval_status === 'APPROVED'
+  })) || [];
 
   return (
     <BookingJourneyClient 
       services={services || []} 
       childrenData={childrenData} 
-      providers={providers || []}
+      providers={formattedProviders}
       isGuest={!user}
     />
   );

@@ -47,7 +47,7 @@ export default async function BookingsHubPage() {
        {/* HEADER SECTION */}
        <section className="flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-in-up">
           <div className="space-y-3">
-             <h1 className="text-6xl font-extrabold font-manrope tracking-tighter leading-none text-white">Bookings Hub</h1>
+             <h1 className="text-6xl font-extrabold font-manrope tracking-tighter leading-none text-white">Admin Dashboard</h1>
              <p className="text-xl text-zinc-400 font-medium italic max-w-xl">
                 Manage therapeutic sessions and classroom schedules in your sanctuary of calm efficiency.
              </p>
