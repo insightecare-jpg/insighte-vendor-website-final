@@ -42,7 +42,7 @@ export async function getRegistry() {
 
     // 3. Flatten/Deduplicate Identities
     const learnerMap = new Map();
-    bookings?.forEach(b => {
+    bookings?.forEach((b: any) => {
       const learner = b.learner_id as any;
       const parent = b.parent_id as any;
       if (learner && !learnerMap.has(learner.id)) {

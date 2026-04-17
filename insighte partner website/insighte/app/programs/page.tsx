@@ -11,9 +11,9 @@ export const metadata = {
 export default async function ProgramsPage() {
   const allPrograms = (await getPrograms()) || [];
   
-  const coreServices = allPrograms.filter(p => p?.type === 'core_service');
-  const courses = allPrograms.filter(p => p?.type === 'course');
-  const groups = allPrograms.filter(p => p?.type === 'support_group');
+  const coreServices = allPrograms.filter((p: any) => p?.type === 'core_service');
+  const courses = allPrograms.filter((p: any) => p?.type === 'course');
+  const groups = allPrograms.filter((p: any) => p?.type === 'support_group');
 
   return (
     <div className="min-h-screen bg-[#0d0f1a] text-[#e8e2d8] selection:bg-[#8b7ff0/30]">

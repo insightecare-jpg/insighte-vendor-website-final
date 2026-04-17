@@ -27,9 +27,9 @@ export async function getProviderServices() {
   return {
     success: true,
     catalog: catalogRes.data || [],
-    selected: selectedRes.data?.map(s => ({ program_id: s.program_id, title: s.title, price: s.price, duration: s.duration })) || [],
+    selected: selectedRes.data?.map((s: any) => ({ program_id: s.program_id, title: s.title, price: s.price, duration: s.duration })) || [],
     regions: regionsRes.data || [],
-    selectedRegions: selectedRegionsRes.data?.map(r => r.region_id) || []
+    selectedRegions: selectedRegionsRes.data?.map((r: any) => r.region_id) || []
   };
 }
 
@@ -46,7 +46,7 @@ export async function updateProviderServices(services: any[], regions: string[])
   await supabase.from('provider_services').delete().eq('provider_id', partner.id);
   if (services.length > 0) {
     await supabase.from('provider_services').insert(
-      services.map(s => ({
+      services.map((s: any) => ({
         provider_id: partner.id,
         program_id: s.program_id,
         title: s.title,

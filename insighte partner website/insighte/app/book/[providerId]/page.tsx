@@ -39,7 +39,7 @@ export default async function BookingPage({ params }: { params: Promise<{ provid
   }
 
   // Transform services to expected format for the client component
-  const formattedServices = services?.map(s => ({
+  const formattedServices = services?.map((s: any) => ({
     id: s.id,
     program_id: s.program_id,
     title: s.title || s.programs?.name || "Therapy Session",
@@ -65,6 +65,7 @@ export default async function BookingPage({ params }: { params: Promise<{ provid
               id: partner.id, 
               name: partner.name, 
               profile_image: partner.avatar_url, 
+              avatar_url: partner.avatar_url,
               verified: partner.approval_status === 'APPROVED'
             }]}
             isGuest={!userData.user}

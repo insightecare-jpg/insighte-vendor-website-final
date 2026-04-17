@@ -43,7 +43,7 @@ export default async function ProgramDetailPage(props: { params: Promise<{ slug:
   // Fallback check (if database is missing as previously noted)
   if (!program) {
      const fallbacks = await getPrograms();
-     program = fallbacks.find(p => p.slug === slug || p.id === slug);
+     program = fallbacks.find((p: any) => p.slug === slug || p.id === slug);
   }
 
   if (!program) notFound();

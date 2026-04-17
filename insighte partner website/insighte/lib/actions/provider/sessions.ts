@@ -209,7 +209,7 @@ export async function getDailySessions() {
 
     return { 
       success: true, 
-      data: sessions?.map(s => ({
+      data: sessions?.map((s: any) => ({
         id: s.id,
         learner: (s.learner as any)?.name || "Unknown",
         age: (s.learner as any)?.age ? `${(s.learner as any).age}y` : "N/A",

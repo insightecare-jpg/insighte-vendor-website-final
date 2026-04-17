@@ -83,7 +83,7 @@ export default function DashboardClient({ partner, status, initialClock }: Dashb
     const result = await clockOut(activeClock.booking_id);
     if (result.success) {
       toast.success("Ending Session", { description: "Finalizing session details." });
-      setActiveClock(prev => ({ ...prev, provider_clock_out: new Date().toISOString() }));
+      setActiveClock((prev: any) => ({ ...prev, provider_clock_out: new Date().toISOString() }));
     } else {
       toast.error(result.error || "Clock-out failed");
     }

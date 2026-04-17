@@ -18,6 +18,7 @@ import {
   ChevronUp,
   ExternalLink
 } from "lucide-react";
+import Link from "next/link";
 import { getPrograms, updateProgram, deleteProgram } from "@/lib/actions/programs";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";

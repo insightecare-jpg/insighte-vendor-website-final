@@ -115,7 +115,7 @@ export function AuthForm({ mode, role }: AuthFormProps) {
             <div className="space-y-2">
               <div className="flex justify-between items-center ml-4 mr-2">
                 <label className="block text-[10px] font-black uppercase tracking-widest text-zinc-500" htmlFor="password">Password</label>
-                {mode === "login" && <Link href="/forgot-password" size="sm" className="text-[10px] text-zinc-600 hover:text-white transition-colors uppercase tracking-widest font-black">Forgot?</Link>}
+                {mode === "login" && <Link href="/forgot-password" className="text-[10px] text-zinc-600 hover:text-white transition-colors uppercase tracking-widest font-black">Forgot?</Link>}
               </div>
               <input 
                 className="w-full h-14 bg-[#191a2d] border border-white/5 rounded-2xl px-6 text-[#e1e0fa] placeholder:opacity-20 focus:ring-2 focus:ring-[#baccb3]/50 transition-all outline-none text-sm font-bold" 

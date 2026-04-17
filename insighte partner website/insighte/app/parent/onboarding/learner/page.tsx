@@ -8,7 +8,6 @@ import {
   Heart, 
   ChevronRight, 
   CheckCircle2,
-  Stethoshcope,
   ShieldCheck,
   Stethoscope
 } from "lucide-react";

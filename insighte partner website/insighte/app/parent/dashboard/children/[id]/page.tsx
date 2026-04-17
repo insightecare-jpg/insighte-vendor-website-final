@@ -44,7 +44,7 @@ export default function ChildProfileDetail() {
     name: "",
     age: "",
     clinical_notes: ""
-  
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -61,15 +61,14 @@ export default function ChildProfileDetail() {
             name: childData.name,
             age: childData.age?.toString() || "",
             clinical_notes: childData.clinical_notes || ""
-          
+          });
 
           // Fetch recent sessions for this child
           const { data: sessionData } = await supabase
             .from('bookings')
             .select('*, partners(name), services(title)')
             .eq('child_id', id)
-            .order('start_time', { ascending: false 
-          
+            .order('start_time', { ascending: false });
           setSessions(sessionData || []);
         }
       } catch (err) {
@@ -87,16 +86,16 @@ export default function ChildProfileDetail() {
         name: editForm.name,
         age: parseInt(editForm.age),
         clinical_notes: editForm.clinical_notes
-      
+      });
 
       if (result.success) {
-        toast.success("Identity Sync Successful", { description: "Changes propagated to sanctuary registry." 
+        toast.success("Identity Sync Successful", { description: "Changes propagated to sanctuary registry." });
         setChild((prev: any) => ({ ...prev, ...editForm, age: parseInt(editForm.age) }));
         setIsEditing(false);
       } else {
-        toast.error("Sync Failed", { description: result.error 
+        toast.error("Sync Failed", { description: result.error });
       }
-    
+    });
   };
 
   if (loading) return <div className="min-h-screen bg-[#111224] flex items-center justify-center text-[#D3C4B5] uppercase font-black tracking-widest text-[10px] animate-pulse">Syncing Learner Identity...</div>;
@@ -307,6 +306,4 @@ export default function ChildProfileDetail() {
       <Footer />
     </div>
   );
-
-}
 }

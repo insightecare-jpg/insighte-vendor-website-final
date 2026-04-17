@@ -89,7 +89,7 @@ export async function getPrograms(type?: string) {
         member_count: 42,
         display_order: 6
       }
-    ].filter(p => !type || p.type === type);
+    ].filter((p: any) => !type || p.type === type);
   }
   return data || [];
 }
@@ -132,10 +132,10 @@ export async function getProgramStats() {
   
   const stats = {
     total: data.length,
-    services: data.filter(p => p.type === 'core_service').length,
-    trainings: data.filter(p => p.type === 'training').length,
-    courses: data.filter(p => p.type === 'course').length,
-    groups: data.filter(p => p.type === 'support_group').length,
+    services: data.filter((p: any) => p.type === 'core_service').length,
+    trainings: data.filter((p: any) => p.type === 'training').length,
+    courses: data.filter((p: any) => p.type === 'course').length,
+    groups: data.filter((p: any) => p.type === 'support_group').length,
   };
   
   return stats;

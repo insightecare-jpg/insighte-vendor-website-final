@@ -9,7 +9,7 @@ async function getSupabase() {
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!, // Use service role for admin tasks
-    { cookies: { get: (n) => cookieStore.get(n)?.value } }
+    { cookies: { get: (n: string) => cookieStore.get(n)?.value } }
   )
 }
 

@@ -24,10 +24,10 @@ export async function getProviderSlots(providerId: string, date: string) {
 
 export async function createBooking(data: {
   provider_id: string;
-  client_id: string;
+  client_id?: string;
   child_id: string;
   service_id: string;
-  slot_id: string;
+  slot_id: string | null;
   start_time: string;
   end_time: string;
   total_price: number;
@@ -56,12 +56,14 @@ export async function createBooking(data: {
   if (bookingError) return { error: bookingError.message };
 
   // 2. Mark the slot as booked
-  const { error: slotError } = await supabase
-    .from('slots')
-    .update({ status: 'booked' })
-    .eq('id', data.slot_id);
-  
-  if (slotError) return { error: slotError.message };
+  if (data.slot_id) {
+    const { error: slotError } = await supabase
+      .from('slots')
+      .update({ status: 'booked' })
+      .eq('id', data.slot_id);
+    
+    if (slotError) return { error: slotError.message };
+  }
 
 
   revalidatePath('/parent/dashboard');

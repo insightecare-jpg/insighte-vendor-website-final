@@ -33,7 +33,7 @@ export default async function BookingJourney() {
     .eq("approval_status", "LIVE")
     .order("name");
 
-  const formattedProviders = providers?.map(p => ({
+  const formattedProviders = providers?.map((p: any) => ({
      ...p,
      profile_image: p.avatar_url,
      verified: p.approval_status === 'LIVE' || p.approval_status === 'APPROVED'

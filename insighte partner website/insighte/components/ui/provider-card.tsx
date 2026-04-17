@@ -30,6 +30,8 @@ interface Provider {
   total_bookings?: number;
   bio?: string;
   provider_type?: string;
+  first_session_price?: number;
+  specialisations?: string[];
 }
 
 interface ProviderCardProps {

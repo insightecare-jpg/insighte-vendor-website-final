@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Search, Filter, Zap, Share2, Globe, Send, Link as LinkIcon, ChevronDown, Sparkles, Video, Play, Headphones, BookOpen, CheckCircle2, Star, Rocket, Brain, Palette, Music, Clock, Waves, ArrowRight } from "lucide-react";
+import { Search, Filter, Zap, Share2, Globe, Send, Link as LinkIcon, ChevronDown, Sparkles, Video, Play, Headphones, BookOpen, CheckCircle2, Star, Rocket, Brain, Palette, Music, Clock, Waves, ArrowRight as LucideArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -29,6 +29,7 @@ interface Post {
   author_avatar_url?: string;
   published_at: string;
   topic_tags?: string[];
+  podcast_embed_url?: string;
 }
 export default function BlogClient({ initialPosts }: { initialPosts: Post[] }) {
   const [view, setView] = useState<"all" | "parents" | "professionals">("all");
